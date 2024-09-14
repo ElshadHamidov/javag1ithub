@@ -9,6 +9,7 @@ public class VariablesPracticeHome {
 	        System.out.println("hasJob: " + hasJob);
 
 	        char studentGrade = 'C';
+	        studentGrade++;
 	        System.out.println("studentGrade: " + studentGrade);
 
 	        double carPrice = 25000;
