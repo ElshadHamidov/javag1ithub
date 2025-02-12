@@ -8,6 +8,8 @@ public class SpringProjectTeacherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringProjectTeacherApplication.class, args);
+		Book bean=run.getBean(Book.class)
+				System.out.println(bean.getName())
 	}
 
 }

@@ -12,7 +12,7 @@ public class TeacherRepository {
 				+ teacher.getName() + "','" + teacher.getSurname() + "','" + teacher.getPhone() + "','"
 				+ teacher.getAddress() + "','" + teacher.getUsername() + "','" + teacher.getPassword() + "')";
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/java_teacher?useSSL=false",
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/java_teacher?useSSL=false",
 					"root","E20091110");
 
 			Statement st = conn.createStatement();
