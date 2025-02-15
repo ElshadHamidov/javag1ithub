@@ -8,8 +8,14 @@ public class SpringProjectTeacherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringProjectTeacherApplication.class, args);
-		Book bean=run.getBean(Book.class)
-				System.out.println(bean.getName())
+		Book bookBean=run.getBean(Book.class);
+		System.out.println(bookBean.getName());
+		System.out.println(bookBean.getPrice());
+		System.out.println(bookBean.getPageCount());
+		Person personBean=run.getBean(Person.class);
+		System.out.println(personBean.getName())
+		System.out.println(personBean.getAge())
+		System.out.println(personBean.getSalary())
 	}
 
 }
