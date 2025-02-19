@@ -1,5 +1,6 @@
 package az.devolopia.spring_project_teacher;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -10,14 +11,15 @@ public class Computer {
     private String brand;
     private Double price;
     private String color;
+
+    @Autowired
     private RAM ram;
 
-    public Computer(RAM ram) {
+    public Computer() {
         this.id = 1;
         this.brand = "Dell";
         this.price = 1200.0;
         this.color = "Black";
-        this.ram = ram;
     }
 
     @PostConstruct
