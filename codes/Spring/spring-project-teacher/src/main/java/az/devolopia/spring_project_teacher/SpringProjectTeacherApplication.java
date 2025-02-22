@@ -3,44 +3,26 @@ package az.devolopia.spring_project_teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class SpringProjectTeacherApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(SpringProjectTeacherApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(SpringProjectTeacherApplication.class, args);
 
-        Employee employeeBean = context.getBean(Employee.class);
-        System.out.println("Employee Details:");
-        System.out.println("ID: " + employeeBean.getId());
-        System.out.println("Name: " + employeeBean.getName());
-        System.out.println("Age: " + employeeBean.getAge());
-        System.out.println("Salary: " + employeeBean.getSalary());
+        Home homeBean1 = context.getBean(Home.class);
+        System.out.println("\nHome 1 Details:");
+        System.out.println("ID: " + homeBean1.getId());
+        System.out.println("Address: " + homeBean1.getAddress());
+        System.out.println("Color: " + homeBean1.getColor());
 
-        Computer computerBean = employeeBean.getComputer();
-        if (computerBean != null) {
-            System.out.println("\nComputer Assigned to Employee:");
-            System.out.println("Brand: " + computerBean.getBrand());
-            System.out.println("Price: $" + computerBean.getPrice());
-            System.out.println("Color: " + computerBean.getColor());
+        Home homeBean2 = context.getBean(Home.class);
+        System.out.println("\nHome 2 Details:");
+        System.out.println("ID: " + homeBean2.getId());
+        System.out.println("Address: " + homeBean2.getAddress());
+        System.out.println("Color: " + homeBean2.getColor());
 
-            RAM ramBean = computerBean.getRam();
-            System.out.println("\nRAM Details in Computer:");
-            System.out.println("Size: " + ramBean.getSize() + "GB");
-            System.out.println("Type: " + ramBean.getType());
-            System.out.println("Speed: " + ramBean.getSpeed() + "MHz");
-        }
-
-        Computer standaloneComputer = context.getBean(Computer.class);
-        System.out.println("\nStandalone Computer Details:");
-        System.out.println("Brand: " + standaloneComputer.getBrand());
-        System.out.println("Price: $" + standaloneComputer.getPrice());
-        System.out.println("Color: " + standaloneComputer.getColor());
-
-        RAM standaloneRam = standaloneComputer.getRam();
-        System.out.println("\nStandalone RAM Details:");
-        System.out.println("Size: " + standaloneRam.getSize() + "GB");
-        System.out.println("Type: " + standaloneRam.getType());
-        System.out.println("Speed: " + standaloneRam.getSpeed() + "MHz");
+        context.close();
     }
 }
