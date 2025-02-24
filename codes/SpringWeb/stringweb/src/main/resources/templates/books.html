@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+        h1 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #f4f4f4; margin: 8px 0; padding: 10px; border-radius: 5px; }
+        a { text-decoration: none; color: white; background: #007BFF; padding: 10px 15px; border-radius: 5px; }
+        a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Book List</h1>
+    <ul>
+        <li th:each="book : ${books}" th:text="${book}"></li>
+    </ul>
+    <a href="/home">Back to Home</a>
+</body>
+</html>

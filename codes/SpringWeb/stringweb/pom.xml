@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
+		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>az.devolopia</groupId>
-	<artifactId>spring-project-teacher</artifactId>
+	<groupId>az.developis.stringweb</groupId>
+	<artifactId>stringweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-project-teacher</name>
-	<description>Spring project for teacher</description>
+	<name>stringweb</name>
+	<description>Demo project for Spring Web</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -32,7 +32,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>

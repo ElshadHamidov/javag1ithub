@@ -1,10 +1,10 @@
-package az.devolopia.spring_project_teacher;
+package az.developis.stringweb.stringweb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringProjectTeacherApplicationTests {
+class StringwebApplicationTests {
 
 	@Test
 	void contextLoads() {
