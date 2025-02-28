@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .team-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .team-member:hover {
+            transform: scale(1.1);
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #FFC107;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            background: #E0A800;
+            transform: scale(1.1);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .team-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ℹ About Us</h1>
+        <p>Welcome to our library! We are passionate about books and believe in the power of knowledge. 
+           Our mission is to provide a diverse collection of books for everyone.</p>
+
+        <h2>Meet Our Team</h2>
+        <div class="team-section">
+            <div class="team-member">
+                <img src="https://th.bing.com/th/id/OIP.ZwssWYlSPlZ_Ss2-Q5vuhQHaHa?w=191&h=191&c=7&r=0&o=5&pid=1.7" alt="Team Member">
+                <p><strong>John Doe</strong></p>
+                <p>Founder & CEO</p>
+            </div>
+            <div class="team-member">
+                <img src="https://th.bing.com/th/id/OIP.t_zNyGt5AtkHxUiMP_p33gHaFQ?w=255&h=181&c=7&r=0&o=5&pid=1.7" alt="Team Member">
+                <p><strong>Jane Smith</strong></p>
+                <p>Chief Librarian</p>
+            </div>
+            <div class="team-member">
+                <img src="https://th.bing.com/th?id=OIF.lTZL%2f7qdx6zQ1hl0QFPtIg&w=271&h=180&c=7&r=0&o=5&pid=1.7" alt="Team Member">
+                <p><strong>Mike Johnson</strong></p>
+                <p>Content Manager</p>
+            </div>
+        </div>
+
+        <a href="/home" class="back-home">🏠 Return to Home</a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Library System. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>
