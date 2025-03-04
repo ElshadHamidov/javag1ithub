@@ -11,6 +11,10 @@
 	<groupId>az.developis.stringweb</groupId>
 	<artifactId>stringweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>springweb</module>
+	</modules>
 	<name>stringweb</name>
 	<description>Demo project for Spraing Web</description>
 	<url/>

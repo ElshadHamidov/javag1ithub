@@ -1,9 +1,9 @@
-package az.developis.stringweb.stringweb;
+package az.developis.stringweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = "az.developis.stringweb")
+@SpringBootApplication
 public class StringwebApplication {
     public static void main(String[] args) {
         SpringApplication.run(StringwebApplication.class, args);
