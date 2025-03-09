@@ -1,23 +1,23 @@
-// package az.developis.stringweb.controller;
+ package az.developis.stringweb.controller;
 
-// import org.springframework.web.bind.annotation.*;
-// import java.util.ArrayList;
-// import java.util.List;
+ import org.springframework.web.bind.annotation.*;
+ import java.util.ArrayList;
+ import java.util.List;
 
-// @RestController
-// @RequestMapping("/students")
-// public class StudentRestController {
+ @RestController
+ @RequestMapping("/students")
+ public class StudentRestController {
 
-//     private final List<Student> studentList = new ArrayList<>();
+     private final List<Student> studentList = new ArrayList<>();
 
-//     @GetMapping
-//     public List<Student> getAllStudents() {
-//         return studentList;
-//     }
+     @GetMapping
+     public List<Student> getAllStudents() {
+         return studentList;
+     }
 
-//     @PostMapping
-//     public Student addStudent(@RequestBody Student student) {
-//         studentList.add(student);
-//         return student;
-//     }
-// }
+     @PostMapping
+     public Student addStudent(@RequestBody Student student) {
+         studentList.add(student);
+         return student;
+     }
+ }
