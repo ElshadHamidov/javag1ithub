@@ -1,23 +1,21 @@
- package az.developis.stringweb.controller;
+package az.developis.stringweb.controller;
 
- import org.springframework.web.bind.annotation.*;
- import java.util.ArrayList;
- import java.util.List;
+import az.developis.stringweb.entity.Student;
+import az.developis.stringweb.repository.StudentDAO;
+import org.springframework.web.bind.annotation.*;
 
- @RestController
- @RequestMapping("/students")
- public class StudentRestController {
+@RestController
+@RequestMapping("/students")
+public class StudentRestController {
+    private final StudentDAO studentDAO;
 
-     private final List<Student> studentList = new ArrayList<>();
+    public StudentRestController(StudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
+    }
 
-     @GetMapping
-     public List<Student> getAllStudents() {
-         return studentList;
-     }
-
-     @PostMapping
-     public Student addStudent(@RequestBody Student student) {
-         studentList.add(student);
-         return student;
-     }
- }
+    @PostMapping("/add")
+    public String addStudent(@RequestBody Student student) {
+        studentDAO.saveStudent(student);
+        return "Student added successfully!";
+    }
+}
