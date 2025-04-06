@@ -5,10 +5,10 @@ import az.book.manga.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
+
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
@@ -19,11 +19,11 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Optional<Book> getById(Long id) {
-        return bookRepository.findById(id);
+    public Book getById(Long id) {
+        return bookRepository.findById(id).orElse(null);
     }
 
-    public Book save(Book book) {
+    public Book create(Book book) {
         return bookRepository.save(book);
     }
 

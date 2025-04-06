@@ -2,10 +2,10 @@ package az.book.manga.exception;
 
 import org.springframework.validation.BindingResult;
 
-public class OurRuntimeException extends RuntimeException {
+public class OurRunTimeException extends RuntimeException {
     private final BindingResult br;
 
-    public OurRuntimeException(BindingResult br) {
+    public OurRunTimeException(BindingResult br) {
         this.br = br;
     }
 

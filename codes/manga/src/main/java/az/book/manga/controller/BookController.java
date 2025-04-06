@@ -1,10 +1,7 @@
 package az.book.manga.controller;
 
-import az.book.manga.exception.OurRuntimeException;
 import az.book.manga.model.Book;
-import az.book.manga.service.BookService;
-import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
+import az.book.manga.repository.BookRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,37 +9,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
+    private final BookRepository bookRepository;
 
-    private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping
     public List<Book> getAllBooks() {
-        return bookService.getAll();
+        return bookRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        return bookService.getById(id).orElse(null);
+    public Book getBook(@PathVariable Long id) {
+        return bookRepository.findById(id).orElse(null);
     }
 
     @PostMapping
-    public Book createBook(@Valid @RequestBody Book book, BindingResult br) {
-        if (br.hasErrors()) throw new OurRuntimeException(br);
-        return bookService.save(book);
+    public Book createBook(@RequestBody Book book) {
+        return bookRepository.save(book);
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Long id, @Valid @RequestBody Book book, BindingResult br) {
-        if (br.hasErrors()) throw new OurRuntimeException(br);
-        return bookService.update(id, book);
+    public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
+        book.setId(id);
+        return bookRepository.save(book);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        bookService.delete(id);
+        bookRepository.deleteById(id);
     }
 }

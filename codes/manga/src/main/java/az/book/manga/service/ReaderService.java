@@ -5,10 +5,10 @@ import az.book.manga.repository.ReaderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReaderService {
+
     private final ReaderRepository readerRepository;
 
     public ReaderService(ReaderRepository readerRepository) {
@@ -19,11 +19,11 @@ public class ReaderService {
         return readerRepository.findAll();
     }
 
-    public Optional<Reader> getById(Long id) {
-        return readerRepository.findById(id);
+    public Reader getById(Long id) {
+        return readerRepository.findById(id).orElse(null);
     }
 
-    public Reader save(Reader reader) {
+    public Reader create(Reader reader) {
         return readerRepository.save(reader);
     }
 

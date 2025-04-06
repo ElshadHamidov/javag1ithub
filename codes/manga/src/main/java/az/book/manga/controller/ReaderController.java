@@ -1,10 +1,7 @@
 package az.book.manga.controller;
 
-import az.book.manga.exception.OurRuntimeException;
 import az.book.manga.model.Reader;
-import az.book.manga.service.ReaderService;
-import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
+import az.book.manga.repository.ReaderRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,37 +9,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/readers")
 public class ReaderController {
+    private final ReaderRepository readerRepository;
 
-    private final ReaderService readerService;
-
-    public ReaderController(ReaderService readerService) {
-        this.readerService = readerService;
+    public ReaderController(ReaderRepository readerRepository) {
+        this.readerRepository = readerRepository;
     }
 
     @GetMapping
     public List<Reader> getAllReaders() {
-        return readerService.getAll();
+        return readerRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Reader getReaderById(@PathVariable Long id) {
-        return readerService.getById(id).orElse(null);
+    public Reader getReader(@PathVariable Long id) {
+        return readerRepository.findById(id).orElse(null);
     }
 
     @PostMapping
-    public Reader createReader(@Valid @RequestBody Reader reader, BindingResult br) {
-        if (br.hasErrors()) throw new OurRuntimeException(br);
-        return readerService.save(reader);
+    public Reader createReader(@RequestBody Reader reader) {
+        return readerRepository.save(reader);
     }
 
     @PutMapping("/{id}")
-    public Reader updateReader(@PathVariable Long id, @Valid @RequestBody Reader reader, BindingResult br) {
-        if (br.hasErrors()) throw new OurRuntimeException(br);
-        return readerService.update(id, reader);
+    public Reader updateReader(@PathVariable Long id, @RequestBody Reader reader) {
+        reader.setId(id);
+        return readerRepository.save(reader);
     }
 
     @DeleteMapping("/{id}")
     public void deleteReader(@PathVariable Long id) {
-        readerService.delete(id);
+        readerRepository.deleteById(id);
     }
 }
