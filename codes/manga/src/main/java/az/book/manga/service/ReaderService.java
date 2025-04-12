@@ -19,7 +19,7 @@ public class ReaderService {
         return readerRepository.findAll();
     }
 
-    public Reader getById(Long id) {
+    public Reader getById(Integer id) {
         return readerRepository.findById(id).orElse(null);
     }
 
@@ -27,12 +27,12 @@ public class ReaderService {
         return readerRepository.save(reader);
     }
 
-    public Reader update(Long id, Reader reader) {
+    public Reader update(Integer id, Reader reader) {
         reader.setId(id);
         return readerRepository.save(reader);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         readerRepository.deleteById(id);
     }
 }

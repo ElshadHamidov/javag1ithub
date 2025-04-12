@@ -19,7 +19,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getById(Long id) {
+    public Book getById(Integer id) {
         return bookRepository.findById(id).orElse(null);
     }
 
@@ -27,12 +27,12 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Book update(Long id, Book book) {
+    public Book update(Integer id, Book book) {
         book.setId(id);
         return bookRepository.save(book);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         bookRepository.deleteById(id);
     }
 }

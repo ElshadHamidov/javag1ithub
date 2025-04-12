@@ -11,7 +11,7 @@ import lombok.*;
 public class Reader {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
     private int age;

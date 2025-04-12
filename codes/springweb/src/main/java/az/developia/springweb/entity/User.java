@@ -1,19 +1,18 @@
-package az.book.manga.model;
+package az.developia.springweb.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String title;
-    private String author;
-    private int year;
+    private String username;
+    private String email;
+    private String password;
 }
