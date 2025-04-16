@@ -1,38 +1,27 @@
 package az.book.manga.service;
 
+import az.book.manga.dto.ReaderRegisterDto;
 import az.book.manga.model.Reader;
 import az.book.manga.repository.ReaderRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class ReaderService {
 
     private final ReaderRepository readerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ReaderService(ReaderRepository readerRepository) {
-        this.readerRepository = readerRepository;
-    }
+    public String register(ReaderRegisterDto dto) {
+        Reader reader = new Reader();
+        reader.setName(dto.getName());
+        reader.setAge(dto.getAge());
+        reader.setEmail(dto.getEmail());
+        reader.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-    public List<Reader> getAll() {
-        return readerRepository.findAll();
-    }
-
-    public Reader getById(Integer id) {
-        return readerRepository.findById(id).orElse(null);
-    }
-
-    public Reader create(Reader reader) {
-        return readerRepository.save(reader);
-    }
-
-    public Reader update(Integer id, Reader reader) {
-        reader.setId(id);
-        return readerRepository.save(reader);
-    }
-
-    public void delete(Integer id) {
-        readerRepository.deleteById(id);
+        readerRepository.save(reader);
+        return "Reader registered successfully";
     }
 }
