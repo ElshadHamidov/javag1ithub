@@ -1,43 +1,26 @@
 package az.book.manga.controller;
 
 import az.book.manga.model.Book;
-import az.book.manga.repository.BookRepository;
+import az.book.manga.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
+@RequiredArgsConstructor
 public class BookController {
-    private final BookRepository bookRepository;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    private final BookService bookService;
+
+    @GetMapping("/by-author")
+    public List<Book> getBooksByAuthor(@RequestParam String author) {
+        return bookService.getBooksByAuthor(author);
     }
 
-    @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Book getBook(@PathVariable Integer id) {
-        return bookRepository.findById(id).orElse(null);
-    }
-
-    @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookRepository.save(book);
-    }
-
-    @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Integer id, @RequestBody Book book) {
-        book.setId(id);
-        return bookRepository.save(book);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Integer id) {
-        bookRepository.deleteById(id);
+    @GetMapping("/search")
+    public List<Book> searchBooks(@RequestParam String keyword) {
+        return bookService.searchBooksByTitle(keyword);
     }
 }
