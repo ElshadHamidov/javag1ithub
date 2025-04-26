@@ -1,5 +1,7 @@
 package az.book.manga.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +12,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReaderRegisterDto {
-    private String name;
-    private int age;
-    private String email;
-    private String password;
+	
+	@Size(min= 2, max=50, message = "min 2 max 50 simvol olmalidir")
+	private String firstName;
+	
+	@Size(min= 2, max=50, message = "min 2 max 50 simvol olmalidir")
+	private String lastName;
+	private String username;
+	private String password; 
+	private String email;
 }
