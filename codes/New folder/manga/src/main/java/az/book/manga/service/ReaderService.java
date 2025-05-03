@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import az.book.manga.dto.ReaderRegisterDto;
-import az.book.manga.entity.Reader;
+import az.book.manga.model.Reader;
 import az.book.manga.exception.InvalidCredentialsException;
 import az.book.manga.exception.OurRuntimeException;
 import az.book.manga.repository.ReaderRepository;
