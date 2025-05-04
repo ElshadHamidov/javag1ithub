@@ -1,54 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./indexstyle.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manga Collection</title>
+  <link rel="stylesheet" href="./indexstyle.css">
 </head>
-
 <body>
-    <div class="container">
-        <div class="carts">
-            <div class="cart">
-                <h3>One Piece</h3>
-                <p>Adventure, Shounen</p>
-                <div class="rating-badge" data-rating="high">9.7</div>
-              </div>
-              
-              <div class="cart">
-                <h3>Naruto</h3>
-                <p>Action, Shounen</p>
-                <div class="rating-badge" data-rating="high">9.2</div>
-              </div>
-              
-              <div class="cart">
-                <h3>Attack on Titan</h3>
-                <p>Action, Drama</p>
-                <div class="rating-badge" data-rating="medium">8.8</div>
-              </div>
-              
-              <div class="cart">
-                <h3>Tokyo Ghoul</h3>
-                <p>Horror, Supernatural</p>
-                <div class="rating-badge" data-rating="low">6.5</div>
-              </div>
-              
-              <div class="cart">
-                <h3>My Hero Academia</h3>
-                <p>Action, Superhero</p>
-                <div class="rating-badge" data-rating="high">8.9</div>
-              </div>
-              
-              <div class="cart">
-                <h3>Demon Slayer</h3>
-                <p>Action, Supernatural</p>
-                <div class="rating-badge" data-rating="high">9.5</div>
-              </div>
-        </div>
-    </div>
-    <script src="./script.js"></script>
-</body>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <h2>Genres</h2>
+      <ul class="genre-list">
+        <li data-genre="all" class="active">All</li>
+        <li data-genre="shounen">Shounen</li>
+        <li data-genre="action">Action</li>
+        <li data-genre="supernatural">Supernatural</li>
+        <li data-genre="drama">Drama</li>
+        <li data-genre="horror">Horror</li>
+        <li data-genre="comedy">Comedy</li>
+        <li data-genre="romance">Romance</li>
+        <li data-genre="adventure">Adventure</li>
+        <li data-genre="fantasy">Fantasy</li>
+        <li data-genre="sci-fi">Sci-Fi</li>
+        <li data-genre="mecha">Mecha</li>
+        <li data-genre="thriller">Thriller</li>
+        <li data-genre="parody">Parody</li>
+        <li data-genre="western">Western</li>
+      </ul>
 
+      <button id="return-button" class="return-btn" >Return</button>
+    </aside>
+
+    <div class="container">
+      <div class="carts"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
