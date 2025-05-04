@@ -38,15 +38,14 @@ public class ReaderFilter extends OncePerRequestFilter {
         String username = jwtUtil.extractUsername(token);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            User readerDetails = new User(username, "", new ArrayList<>());
-            UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(readerDetails, null, readerDetails.getAuthorities());
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            User userDetails = new User(username, "", new ArrayList<>());
+            UsernamePasswordAuthenticationToken readerToken =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            readerToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            SecurityContextHolder.getContext().setAuthentication(authToken);
+            SecurityContextHolder.getContext().setAuthentication(readerToken);
         }
 
         chain.doFilter(request, response);
     }
 }
-  
