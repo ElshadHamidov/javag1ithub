@@ -43,7 +43,7 @@ public class ReaderController {
     }
 
     @GetMapping(path = "/profile")
-    public ResponseEntity<Map<String, String>> getReaderDetails(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<Map<String, Object>> getReaderDetails(@RequestHeader("Authorization") String token) {
         return service.getReaderDetail(token);
     }
 

@@ -3,6 +3,7 @@ package az.book.manga.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.book.manga.dto.BookRequestDto;
+import az.book.manga.model.Book;
 import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
 
@@ -30,6 +32,7 @@ public class BookController {
     }
 
     @PostMapping(path = "/add")
+    @PreAuthorize("hasAuthority('ROLE_ADD_BOOK')")
     public void create(@RequestBody BookRequestDto dto) {
         bookService.add(dto);
     }
@@ -40,8 +43,8 @@ public class BookController {
     }
 
     @GetMapping(path = "/title")
-    public List<String> getBookTitles() {
-        return bookService.getBookTitles();
+    public List<String> getBookTitles(){
+        return bookService.getBookTitle();
     }
 
     @DeleteMapping(path = "/{id}")

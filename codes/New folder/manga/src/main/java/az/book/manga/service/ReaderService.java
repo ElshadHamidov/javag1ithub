@@ -1,18 +1,20 @@
 package az.book.manga.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import az.book.manga.dto.ReaderRegisterDto;
-import az.book.manga.model.Reader;
+import az.book.manga.model.Authorities;
 import az.book.manga.exception.InvalidCredentialsException;
 import az.book.manga.exception.OurRuntimeException;
-import az.book.manga.repository.BookRepository;
 import az.book.manga.repository.ReaderRepository;
+import az.book.manga.repository.BookRepository;
 import az.book.manga.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -21,63 +23,39 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReaderService {
 
-	private final ReaderRepository readerRepository;
-	private final BookRepository bookRepository;
-	private final PasswordEncoder passwordEncoder;
-	private final JwtUtil jwtUtil;
+    private final BookRepository bookRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ReaderRepository authorityRepository;
+    private final JwtUtil jwtUtil;
 
-	public String create(ReaderRegisterDto dto) {
-		Optional<Reader> byUsername = readerRepository.findByUsername(dto.getUsername());
-		if (byUsername.isPresent()) {
-			throw new OurRuntimeException(null, "Username already exists");
-		}
+    public String login(ReaderRegisterDto dto) {
+        Optional<Authorities> authority = authorityRepository.findByUsername(dto.getUsername());
 
-		String encode = passwordEncoder.encode(dto.getPassword());
+        if (!authority.isPresent() || !passwordEncoder.matches(dto.getPassword(), authority.get().getPassword())) {
+            throw new InvalidCredentialsException("Username or password incorrect");
+        }
 
-		Reader reader = new Reader();
-		reader.setFirstName(dto.getFirstName());
-		reader.setLastName(dto.getLastName());
-		reader.setUsername(dto.getUsername());
-		reader.setEmail(dto.getEmail());
-		reader.setPassword(encode);
-		readerRepository.save(reader);
-		return "Reader created successfully";
-	}
+        List<String> authorityList = authorityRepository.findByUsername(dto.getUsername()).stream()
+                .map(Authorities::getAuthority)
+                .collect(Collectors.toList());
 
-	public String login(ReaderRegisterDto dto) {
-		Optional<Reader> reader = readerRepository.findByUsername(dto.getUsername());
+        return jwtUtil.generateToken(dto.getUsername(), dto.getFirstName(), 
+            dto.getLastName(), dto.getEmail(), authorityList);
+    }
 
-		if (!reader.isPresent() || !passwordEncoder.matches(dto.getPassword(), reader.get().getPassword())) {
-			throw new InvalidCredentialsException("Username or password incorrect");
-		}
+    public ResponseEntity<Map<String, Object>> getReaderDetail(String token) {
+        if (token.startsWith("Bearer")) {
+            token = token.substring(7);
+        }
+        Map<String, Object> claims = jwtUtil.extractClaims(token);
+        return ResponseEntity.ok(claims);
+    }
 
-		return jwtUtil.generateToken(
-			reader.get().getUsername(),
-			reader.get().getFirstName(),
-			reader.get().getLastName(),
-			reader.get().getEmail()
-		);
-	}
+    public void deleteReader(Integer id) {
+        if (id == null || id <= 0) {
+            throw new OurRuntimeException(null, "ID is invalid");
+        }
 
-	public ResponseEntity<Map<String, String>> getReaderDetail(String token) {
-		if (token.startsWith("Bearer")) {
-			token = token.substring(7);
-		}
-		Map<String, String> claims = jwtUtil.extractClaims(token);
-		return ResponseEntity.ok(claims);
-	}
-
-	public void delete(Integer id) {
-		if (id == null || id <= 0) {
-			throw new OurRuntimeException(null, "ID is required");
-		}
-		Optional<Reader> found = readerRepository.findById(id);
-		if (found.isPresent()) {
-			Reader reader = found.get();
-			readerRepository.deleteById(id);
-			bookRepository.deleteReaderBooks(reader.getId());
-		} else {
-			throw new OurRuntimeException(null, "Reader not found");
-		}
-	}
+        bookRepository.deleteBooksByReaderId(id);
+    }
 }

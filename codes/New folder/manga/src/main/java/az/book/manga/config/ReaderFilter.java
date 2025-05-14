@@ -1,9 +1,12 @@
 package az.book.manga.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -34,16 +37,24 @@ public class ReaderFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = authHeader.substring(7); // "Bearer " sözünü atırıq
+        String token = authHeader.substring(7); 
         String username = jwtUtil.extractUsername(token);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            User userDetails = new User(username, "", new ArrayList<>());
-            UsernamePasswordAuthenticationToken readerToken =
-                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            readerToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            Map<String, Object> claims = jwtUtil.extractClaims(token);
+            List<String> authorities = (List<String>) claims.get("authorities");
 
-            SecurityContextHolder.getContext().setAuthentication(readerToken);
+            List<SimpleGrantedAuthority> grantedAuthorities = authorities.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+
+            User userDetails = new User(username, "", grantedAuthorities);
+
+            UsernamePasswordAuthenticationToken authToken =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, grantedAuthorities);
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
 
         chain.doFilter(request, response);
