@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.book.manga.dto.BookRequestDto;
-import az.book.manga.model.Book;
 import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/books")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearerAuth")
+@Tag(name = "Book Controller", description = "Book APIs")
 public class BookController {
 
     @Autowired
@@ -38,12 +43,16 @@ public class BookController {
     }
 
     @GetMapping(path = "/getAll")
+    @Operation(
+        description = "Get API for Book",
+        summary = "This is a summary for Book get API"
+    )
     public BookResponse getAll() {
         return bookService.get();
     }
 
     @GetMapping(path = "/title")
-    public List<String> getBookTitles(){
+    public List<String> getBookTitles() {
         return bookService.getBookTitle();
     }
 

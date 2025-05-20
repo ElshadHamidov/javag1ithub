@@ -1,5 +1,6 @@
 package az.book.manga.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(name = "Book Request Dto", description = "Kitab məlumatlarını qəbul edən DTO")
 public class BookRequestDto {
     private Integer id;
     private String title;
-    private String author;
-    private Integer year;
-    private Integer readerId;
+    private String genre;
+    private Integer rating;
+    private Integer userId;
 }

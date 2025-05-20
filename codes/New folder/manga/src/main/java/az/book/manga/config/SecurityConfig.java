@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-	private final ReaderFilter readerFilter;
+	private final AuthFilter authFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,13 +32,23 @@ public class SecurityConfig {
             	.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/auth/login").permitAll()
+                
+                .requestMatchers(
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**",
+                        "/v3/api-docs",
+                        "/swagger-resources/**",
+                        "/webjars/**"
+                   ).permitAll()
+                
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exc -> exc
             		.authenticationEntryPoint((request,response,authException) -> {
-            			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            			response.sendError(HttpServletResponse.SC_UNAUTHORIZED); //401
             		}))
-            .addFilterBefore(readerFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
 
