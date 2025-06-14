@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,17 +32,18 @@ public class ReaderService {
     public String login(ReaderRegisterDto dto) {
         Optional<Authorities> authority = authorityRepository.findByUsername(dto.getUsername());
 
-        if (!authority.isPresent() || !passwordEncoder.matches(dto.getPassword(), authority.get().getPassword())) {
-            throw new InvalidCredentialsException("Username or password incorrect");
-        }
-
-        List<String> authorityList = authorityRepository.findByUsername(dto.getUsername()).stream()
-                .map(Authorities::getAuthority)
-                .collect(Collectors.toList());
-
-        return jwtUtil.generateToken(dto.getUsername(), dto.getFirstName(), 
-            dto.getLastName(), dto.getEmail(), authorityList);
+    @Autowired
+        private ModelMapper modelMapper;if(!authority.isPresent()||!passwordEncoder.matches(dto.getPassword(),authority.get().getPassword()))
+    {
+        throw new InvalidCredentialsException("Username or password incorrect");
     }
+    List<String> authorityList = authorityRepository.findByUsername(dto.getUsername()).stream()
+            .map(Authorities::getAuthority)
+            .collect(Collectors.toList());
+
+    return jwtUtil.generateToken(dto.getUsername(),dto.getFirstName(),dto.getLastName(),dto.getEmail(),authorityList);
+    }
+    modelMapper.map(dto,user);
 
     public ResponseEntity<Map<String, Object>> getReaderDetail(String token) {
         if (token.startsWith("Bearer")) {
