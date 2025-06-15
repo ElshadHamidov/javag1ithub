@@ -1,6 +1,6 @@
 package dovr;
 
-// import java.util.Scanner;
+import java.util.Scanner;
 
 public class JavaTest {
     public static void main(String[] args) {
@@ -24,10 +24,30 @@ public class JavaTest {
 
         // System.out.println("Sum of Numbers: " + sum);
         // scanner.close()
-        for (int i = 1; i < 200; i++) {
-            if (i % 3 == 0 && i % 7 == 0) {
-                System.out.println(i);
+        // for (int i = 1; i < 200; i++) {
+        //     if (i % 3 == 0 && i % 7 == 0) {
+        //         System.out.println(i);
+        //     }
+        // }
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the number you like: ");
+        int number = scanner.nextInt();
+        
+        number = Math.abs(number);
+        
+        int maxDigit = 0;
+        
+        while (number > 0) {
+            int digit = number % 10;
+            if (digit > maxDigit) {
+                maxDigit = digit;
             }
+            number /= 10;
         }
+
+        System.out.println("Biggest Digit: " + maxDigit);
+
+        scanner.close();
     }
 }
