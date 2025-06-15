@@ -34,19 +34,15 @@ public class JavaTest {
         System.out.print("Enter the number you like: ");
         int number = scanner.nextInt();
         
-        number = Math.abs(number);
-        
-        int maxDigit = 0;
+        int f = 1;
         
         while (number > 0) {
-            int digit = number % 10;
-            if (digit > maxDigit) {
-                maxDigit = digit;
-            }
-            number /= 10;
+            f*=number;
+            number--;
+
         }
 
-        System.out.println("Biggest Digit: " + maxDigit);
+        System.out.println("Factorial: " + f);
 
         scanner.close();
     }
