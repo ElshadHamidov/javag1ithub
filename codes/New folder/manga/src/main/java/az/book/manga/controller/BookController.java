@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import az.book.manga.dto.BookRequestDto;
 import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
+import az.book.manga.model.Book;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,11 +31,6 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-
-    @GetMapping
-    public String getBook() {
-        return "get book";
-    }
 
     @PostMapping(path = "/add")
     @PreAuthorize("hasAuthority('ROLE_ADD_BOOK')")
@@ -51,6 +47,11 @@ public class BookController {
         return bookService.get();
     }
 
+    @GetMapping(path = "/pagination/begin/{begin}/length/{length}")
+    public List<Book> pagination(@PathVariable Integer begin, @PathVariable Integer length) {
+        return bookService.findPagination(begin, length);
+    }
+
     @GetMapping(path = "/title")
     public List<String> getBookTitles() {
         return bookService.getBookTitle();
@@ -59,5 +60,10 @@ public class BookController {
     @DeleteMapping(path = "/{id}")
     public void deleteBook(@PathVariable Integer id) {
         bookService.delete(id);
+    }
+
+    @GetMapping(path = "/{id}")
+    public BookResponseDto getById(@PathVariable Integer id) {
+        return bookService.getBookById(id);
     }
 }

@@ -21,4 +21,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = "SELECT title FROM books", nativeQuery = true)
     List<String> getBookTitles();
+
+    @Query(value = "Select * from movies limit ?1, ?2",nativeQuery = true)More actions
+	List<Movie> pagination(Integer b, Integer l);
 }

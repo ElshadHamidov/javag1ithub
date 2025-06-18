@@ -101,4 +101,8 @@ public class BookService {
             throw new OurRuntimeException(null, "Öz kitabını silə bilərsən");
         }
     }
+    public List<Book> findpagination(Integer begin, Integer length) {
+		
+		return bookRepository.pagination(begin, length);
+	}
 }
