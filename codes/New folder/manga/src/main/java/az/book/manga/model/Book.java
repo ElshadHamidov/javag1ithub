@@ -19,4 +19,13 @@ public class Book {
     private String title;
     private String author;
     private int year;
+
+    @OneToOne(mappedBy = "book")
+	private BookDetail bookDetail;
+	
+	@ManyToOne
+	private Category category;
+	
+	@ManyToMany(mappedBy = "books")
+	private List<Reader> viewers;
 }

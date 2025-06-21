@@ -32,4 +32,10 @@ public class Reader {
 
     private String username;
     private String password;
+
+    @ManyToMany
+	@JoinTable(name = "user_books",
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "book_id"))
+	private List<Book> books;
 }
