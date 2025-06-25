@@ -17,6 +17,7 @@ import az.book.manga.dto.BookRequestDto;
 import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
 import az.book.manga.model.Book;
+import az.book.manga.model.TestEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -66,4 +67,9 @@ public class BookController {
     public BookResponseDto getById(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
+
+    @GetMapping(path = "/view")More actions
+	public List<TestEntity> getView(){
+		return movieService.findView();
+	}
 }

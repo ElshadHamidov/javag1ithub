@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import az.book.manga.dto.BookRequestDto;
 import az.book.manga.model.Book;
+import az.book.manga.model.TestEntity;
 import az.book.manga.model.User;
 import az.book.manga.exception.OurRuntimeException;
 import az.book.manga.repository.BookRepository;
 import az.book.manga.repository.UserRepository;
+import az.book.manga.repository.ViewRepository;
 import az.book.manga.response.BookResponse;
 
 @Service
@@ -26,6 +28,9 @@ public class BookService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+	private ViewRepository viewRepository;
 
     public void add(BookRequestDto dto) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -104,5 +109,9 @@ public class BookService {
     public List<Book> findpagination(Integer begin, Integer length) {
 		
 		return bookRepository.pagination(begin, length);
+	}
+    public List<TestEntity> findView() {More actions
+		
+		return viewRepository.findAll();
 	}
 }
