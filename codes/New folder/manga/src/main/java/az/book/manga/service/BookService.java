@@ -30,7 +30,7 @@ public class BookService {
     private UserRepository userRepository;
 
     @Autowired
-	private ViewRepository viewRepository;
+    private ViewRepository viewRepository;
 
     public void add(BookRequestDto dto) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -39,9 +39,10 @@ public class BookService {
 
         Book book = new Book();
         book.setId(null);
-        book.setGenre(dto.getGenre());
-        book.setRating(dto.getRating());
-        book.setTitle(dto.getTitle());
+        // movie.setGenre(dto.getGenre());
+        // movie.setRating(dto.getRating());
+        // movie.setTitle(dto.getTitle());
+        mapper.map(dto, movie);
         book.setUserId(id);
         bookRepository.save(book);
     }
@@ -70,9 +71,9 @@ public class BookService {
         };
 
         List<String> filteredTitles = books.stream()
-            .map(titleMapper)
-            .filter(filterByTitle)
-            .collect(Collectors.toList());
+                .map(titleMapper)
+                .filter(filterByTitle)
+                .collect(Collectors.toList());
 
         response.setBooks(filteredTitles);
 
@@ -106,10 +107,12 @@ public class BookService {
             throw new OurRuntimeException(null, "Öz kitabını silə bilərsən");
         }
     }
+
     public List<Book> findpagination(Integer begin, Integer length) {
-		
-		return bookRepository.pagination(begin, length);
-	}
+
+        return bookRepository.pagination(begin, length);
+    }
+
     public List<TestEntity> findView() {More actions
 		
 		return viewRepository.findAll();
