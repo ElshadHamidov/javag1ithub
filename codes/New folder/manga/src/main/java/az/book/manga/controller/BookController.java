@@ -3,6 +3,7 @@ package az.book.manga.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,9 @@ import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
 import az.book.manga.model.Book;
 import az.book.manga.model.TestEntity;
-
+import az.book.manga.dynamic.DynamicFiltering;
+import az.book.manga.repository.BookRepository;
+import az.book.manga.response.BookListResponseModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

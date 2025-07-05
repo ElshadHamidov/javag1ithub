@@ -1,5 +1,6 @@
 package az.book.manga.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -19,6 +20,7 @@ import az.book.manga.repository.BookRepository;
 import az.book.manga.repository.UserRepository;
 import az.book.manga.repository.ViewRepository;
 import az.book.manga.response.BookResponse;
+import az.book.manga.response.BookResponseModel;
 
 @Service
 public class BookService {
@@ -39,10 +41,10 @@ public class BookService {
 
         Book book = new Book();
         book.setId(null);
-        // movie.setGenre(dto.getGenre());
-        // movie.setRating(dto.getRating());
-        // movie.setTitle(dto.getTitle());
-        mapper.map(dto, movie);
+        // Book.setGenre(dto.getGenre());
+        // Book.setRating(dto.getRating());
+        // Book.setTitle(dto.getTitle());
+        mapper.map(dto, Book);
         book.setUserId(id);
         bookRepository.save(book);
     }
@@ -113,8 +115,18 @@ public class BookService {
         return bookRepository.pagination(begin, length);
     }
 
-    public List<TestEntity> findView() {More actions
+    public List<TestEntity> findView() {
 		
 		return viewRepository.findAll();
+	}
+    public List<BookResponseModel> convertBookToResponseModel(List<Book> Books) {
+		// TODO Auto-generated method stub
+		List<BookResponseModel> dtos = new ArrayList<BookResponseModel>();
+		for (Book book : books) {
+			BookResponseModel dto = new BookResponseModel();
+			mapper.map(book, dto);
+			dtos.add(dto);
+		}
+		return dtos;
 	}
 }
