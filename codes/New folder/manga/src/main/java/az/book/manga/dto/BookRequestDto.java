@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.ToString;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "Book Request Dto", description = "Kitab məlumatlarını qəbul edən DTO")
+@ToString
 public class BookRequestDto {
     private Integer id;
     private String title;

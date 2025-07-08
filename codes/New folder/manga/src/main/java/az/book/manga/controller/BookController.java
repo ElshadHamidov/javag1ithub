@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import az.book.manga.dto.BookRequestDto;
 import az.book.manga.response.BookResponse;
 import az.book.manga.service.BookService;
@@ -42,11 +43,10 @@ public class BookController {
         bookService.add(dto);
     }
 
+    private Logger log = LoggerFactory.getLogger(BookController.class);
+
     @GetMapping(path = "/getAll")
-    @Operation(
-        description = "Get API for Book",
-        summary = "This is a summary for Book get API"
-    )
+    @Operation(description = "Get API for Book", summary = "This is a summary for Book get API")
     public BookResponse getAll() {
         return bookService.get();
     }
@@ -71,8 +71,11 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @GetMapping(path = "/view")More actions
-	public List<TestEntity> getView(){
-		return movieService.findView();
-	}
+    @GetMapping(path = "/view")
+     log.info("GET books/getAll cagirildi");
+
+    public List<TestEntity> getView() {
+        return movieService.findView();
+    }
+    log.info("PUT api cagirildi" + dto);
 }
