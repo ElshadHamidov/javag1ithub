@@ -9,4 +9,6 @@ import lombok.Data;
 public class ReaderListResponse {
 
 	private List<ReaderEntity> readerResponse;
+
+	private List<ReaderResponse> readerwitdhBooks;
 }
