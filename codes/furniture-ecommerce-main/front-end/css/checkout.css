@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #222;
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+header {
+    width: 100%;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-image {
+    width: 100%;
+}
+
+.header-image img {
+    width: 100%;
+    display: block;
+}
+
+.sub-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sub-header .part1 {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.sub-header .part1 ul {
+    display: flex;
+    gap: 30px;
+    list-style-type: none;
+}
+
+.sub-header .part1 ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.sub-header .part1 ul li a:hover {
+    color: #007bff;
+}
+
+.sub-header .part2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0.5;
+}
+
+.sub-header .part2 ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    list-style-type: none;
+}
+
+.sub-header .part2 ul li a img {
+    width: 20px;
+    transition: transform 0.3s ease;
+}
+
+.sub-header .part2 ul li a img:hover {
+    transform: scale(1.1);
+}
+
+.sub-header .part2 ul li button {
+    padding: 8px 15px;
+    background-color: white;
+    border: 1px solid #333;
+    color: #333;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sub-header .part2 ul li button:hover {
+    background-color: #333;
+    color: white;
+}
+
+.sub-main {
+    width: 85%;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    gap: 40px;
+}
+
+.left-side,
+.right-side {
+    width: 50%;
+}
+
+.left-side h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #333;
+}
+
+.fullName {
+    display: flex;
+    gap: 10px;
+}
+
+.firstName input,
+.lastName input {
+    width: 188px;
+}
+
+input,
+select {
+    width: 387px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    outline: none;
+    padding: 0 10px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #007bff;
+}
+
+label {
+    font-size: 14px;
+    color: #444;
+}
+
+form div {
+    padding-top: 10px;
+}
+
+form div input,
+select {
+    margin-top: 5px;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 35px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+.cart-totals {
+    padding: 0 80px;
+}
+
+.cart-totals div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.cart-totals div h4 {
+    font-weight: 400;
+    color: #333;
+}
+
+.right-side hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.info {
+    font-size: 15px;
+    margin-bottom: 50px;
+    color: #555;
+}
+
+.btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn button {
+    width: 300px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn button:hover {
+    background-color: #333;
+    color: white;
+}
+
+footer {
+    width: 100%;
+    background-color: #fbf8f8;
+    margin-top: 50px;
+    padding: 50px 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+.sub-footer {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.sub-footer .f_part1 {
+    width: 350px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub-footer .f_part1 p a {
+    text-decoration: none;
+    color: black;
+}
+
+.sub-footer .f_part2,
+.sub-footer .f_part3 {
+    width: 200px;
+}
+
+.sub-footer .f_part2 h4,
+.sub-footer .f_part3 h4,
+.sub-footer .f_part4 h4 {
+    color: grey;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.sub-footer .f_part2 ul,
+.sub-footer .f_part3 ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sub-footer .f_part2 ul li,
+.sub-footer .f_part3 ul li {
+    padding-top: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.sub-footer .f_part2 ul li:hover,
+.sub-footer .f_part3 ul li:hover {
+    color: #007bff;
+}
+
+.f_part41 {
+    display: flex;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.f_part41 .input1,
+.f_part41 .input2 {
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.f_part41 .input1:focus,
+.f_part41 .input2:focus {
+    border-color: #007bff;
+}
+
+.f_part41 .input1 {
+    width: 173px;
+}
+
+.f_part41 .input2 {
+    width: 100px;
+    color: black;
+}
+
+@media (max-width: 992px) {
+    .sub-main {
+        flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+    }
+
+    .right-side {
+        margin-top: 30px;
+    }
+
+    .sub-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sub-footer .f_part1,
+    .sub-footer .f_part2,
+    .sub-footer .f_part3,
+    .sub-footer .f_part4 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .sub-header .part1 ul {
+        gap: 15px;
+    }
+
+    .sub-header .part2 ul {
+        gap: 15px;
+    }
+
+    .f_part41 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .f_part41 .input1,
+    .f_part41 .input2 {
+        width: 100%;
+    }
+
+    input,
+    select {
+        width: 100%;
+    }
+
+    .firstName input,
+    .lastName input {
+        width: 100%;
+    }
+}
