@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StudentService {
@@ -20,5 +22,10 @@ public class StudentService {
             throw new IllegalArgumentException("Bu username ilə artıq tələbə var");
         }
         return repo.save(student);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Student> getAllStudents() {
+        return repo.findAll();
     }
 }
