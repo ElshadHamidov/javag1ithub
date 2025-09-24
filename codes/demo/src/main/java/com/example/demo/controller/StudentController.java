@@ -3,32 +3,36 @@ package com.example.demo.controller;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/students")
-@RequiredArgsConstructor
 public class StudentController {
     private final StudentService service;
 
-    @PostMapping
-    public ResponseEntity<?> addStudent(@Valid @RequestBody Student student) {
-        try {
-            return ResponseEntity.status(201).body(service.createStudent(student));
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(new ErrorResponse(ex.getMessage()));
-        } catch (Exception ex) {
-            return ResponseEntity.status(500).body(new ErrorResponse("Server xətası"));
-        }
+    public StudentController(StudentService service) {
+        this.service = service;
     }
 
-    @Data
-    @AllArgsConstructor
-    static class ErrorResponse {
-        private String message;
+    @PostMapping
+    public ResponseEntity<Student> create(@Valid @RequestBody StudentCreateRequest req,
+                                          UriComponentsBuilder uriBuilder) {
+        Student saved = service.create(req);
+        return ResponseEntity.created(
+                uriBuilder.path("/api/students/{id}").buildAndExpand(saved.getId()).toUri()
+        ).body(saved);
+    }
+
+    @GetMapping
+    public ResponseEntity<StudentListResponse> getAll() {
+        return ResponseEntity.ok(service.findAllStudents());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteStudent(id);
+        return ResponseEntity.noContent().build();
     }
 }
