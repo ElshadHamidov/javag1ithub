@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Landing Page</title>
+  <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">E-commerce</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./signup.html">Sign Up</a></li>
+        <li><a href="./shop.html" class="shop-btn">Shop</a></li>
+      </ul>
+    </nav>
+    <div class="search-login">
+      <input type="text" placeholder="Search products...">
+      <button class="login-btn">Log In</button>
+    </div>
+  </header>
+
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="height: 450px;">
+        <img src="https://th.bing.com/th/id/OIP.SSAvHTNhOZFuG5bkO5rbXgHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" style="height: 450px;">
+        <img src="https://th.bing.com/th/id/OIP.1uLwLQ_jqd4mFW7Z7vFuDAHaEK?w=315&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" style="height: 450px;">
+        <img src="https://th.bing.com/th?id=OIF.cDVuLYlxmJeiHwPFU%2fvRQw&w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+          class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <section class="shop-collection">
+    <h2>Shop Collection</h2>
+    <div class="collection-grid">
+      <div class="collection-card" id="headband">
+        <h3>Headband</h3>
+      </div>
+      <div class="collection-card" id="earbuds">
+        <h3>Earbuds</h3>
+      </div>
+      <div class="collection-card" id="accessories">
+        <h3>Accessories</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="promotion">
+    <div class="promo-text" style="color: #fff;">
+      <h2>Hurry up! 40% OFF</h2>
+      <p>Thousands of high-end items are waiting for you!</p>
+      <div class="countdown-container">
+        <h3 class="countdown-title">Limited Time Offer</h3>
+        <div class="countdown">
+          <div class="countdown-box">
+            <span id="days">00</span>
+            <div class="label">Days</div>
+          </div>
+          <div class="countdown-box">
+            <span id="hours">00</span>
+            <div class="label">Hours</div>
+          </div>
+          <div class="countdown-box">
+            <span id="minutes">00</span>
+            <div class="label">Minutes</div>
+          </div>
+          <div class="countdown-box">
+            <span id="seconds">00</span>
+            <div class="label">Seconds</div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="hero-btn">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="feedback">
+    <h2>Feedback Corner</h2>
+    <div class="feedback-grid">
+      <div class="feedback-card">
+        <p>"Amazing shopping experience! The quality of products is top-notch."</p>
+        <h4>- Emily Wilson</h4>
+      </div>
+      <div class="feedback-card">
+        <p>"The discounts are incredible and delivery is super fast!"</p>
+        <h4>- Sarah Thompson</h4>
+      </div>
+      <div class="feedback-card">
+        <p>"I love the variety of products available. Highly recommended!"</p>
+        <h4>- Olivia Martinez</h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="explore-products">
+    <h2>Explore Our Products</h2>
+    <div class="product-grid">
+      <div class="product-card" id="popular">
+        <h3>Popular Products</h3>
+      </div>
+      <div class="product-card" id="tablet">
+        <h3>Galaxy Tab</h3>
+      </div>
+      <div class="product-card" id="phone">
+        <h3>Samsung Galaxy</h3>
+      </div>
+      <div class="product-card" id="laptop">
+        <h3>Galaxy Book</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Exclusive</h3>
+        <p>Get 10% off your first order</p>
+        <div class="subscribe">
+          <input type="email" placeholder="Enter your email"><br><br>
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh</p>
+        <p>ecommerce@gmail.com</p>
+        <p>+88015-88888-9999</p>
+      </div>
+      <div class="footer-section">
+        <h3>Account</h3>
+        <a href="./profile.html">My Account</a>
+        <a href="./signup.html">Login / Register</a>
+        <a href="./cart.html">Cart</a>
+        <a href="#">Wishlist</a>
+        <a href="./shop.html">Shop</a>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Link</h3>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms Of Use</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Download App</h3>
+        <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="App QR">
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © Copyright Remi 2025. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
