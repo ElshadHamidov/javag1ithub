@@ -19,23 +19,21 @@ form.addEventListener('submit', async function (e) {
         return;
     }
 
-    try {
-        const response = await fetch('http://localhost:3306/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, surname, email, username, password })
-        });
+    const response = await fetch('http://localhost:8086/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, surname, email, username, password })
+    });
 
+    
+    if (response.ok) {
+        form.reset();
+        alert('Qeydiyyat ugurla tamamlandi')
+    }else{
         const data = await response.json();
         alert(data.message);
-
-        if (response.ok) {
-            form.reset();
-        }
-    } catch (err) {
-        alert('Error connecting to server');
-        console.error(err);
     }
+
 });
 
 function validateEmail(email) {

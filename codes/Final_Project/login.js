@@ -1,4 +1,3 @@
-// Select the form
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async function (e) {
@@ -12,24 +11,21 @@ form.addEventListener('submit', async function (e) {
         return;
     }
 
-    try {
-        const response = await fetch('http://localhost:3306/login', {
+        const response = await fetch('http://localhost:8086/users/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         });
 
-        const data = await response.json();
-
+        
         if (response.ok) {
-            alert('Login successful! Welcome ' + data.username);
-            // Optionally redirect to profile or dashboard
+            const token = await response.text();
+            localStorage.setItem('token', token);
+            alert('Login successful! Welcome ');
             window.location.href = './profile.html';
         } else {
+            const data = await response.json();
             alert(data.message);
         }
-    } catch (err) {
-        alert('Error connecting to server');
-        console.error(err);
-    }
+ 
 });
