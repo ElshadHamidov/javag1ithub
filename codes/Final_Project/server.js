@@ -48,8 +48,8 @@ app.post('/signup', async (req, res) => {
 });
 
 // Start server
-app.listen(3306, () => {
-    console.log('Server running on http://localhost:3306');
+app.listen(8086, () => {
+    console.log('Server running on http://localhost:8086');
 });
 const bcrypt = require('bcrypt'); // already installed
 
@@ -78,5 +78,18 @@ app.post('/login', (req, res) => {
 
         // Login successful
         res.json({ message: 'Login successful', username: user.username });
+    });
+});
+app.get("/api/order/:orderId", (req, res) => {
+    const { orderId } = req.params;
+    const sql = "SELECT * FROM orders WHERE order_id = ?";
+    db.query(sql, [orderId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Database query failed" });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: "Order not found" });
+        }
+        res.json(result[0]);
     });
 });

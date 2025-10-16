@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-commerce Sign Up</title>
-  <link rel="stylesheet" href="signup.css">
+  <title>Cart - E-commerce</title>
+  <link rel="stylesheet" href="./order.css">
   <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +17,7 @@
   <div class="top-banner">
     Summer Sale! 50% Off All Items & Free Express Delivery - OFF 50% <a href="#">ShopNow</a>
   </div>
+
   <header>
     <div class="logo">E-commerce</div>
     <nav>
@@ -31,18 +33,42 @@
     </div>
   </header>
   <main>
-    <div class="form-container">
-      <h2>Create an account</h2>
-      <form>
-        <input type="text" placeholder="Name" required>
-        <input type="text" placeholder="Surname" required>
-        <input type="email" placeholder="Email" required>
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit" class="create-btn">Create account</button>
-      </form>
-      <p class="login-text">Already have an account? <a href="./login.html">Log in</a></p>
-    </div>
+    <section class="order-tracker">
+      <h1>Your Order Status</h1>
+      <p class="order-id">Order ID: <strong id="order-id"></strong></p>
+
+      <div class="tracker">
+        <div class="step" data-status="Confirmed">
+          <div class="icon"><i class="fa-solid fa-clipboard-check"></i></div>
+          <p>Confirmed</p>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-status="Shipped">
+          <div class="icon"><i class="fa-solid fa-box-open"></i></div>
+          <p>Shipped</p>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-status="Out for Delivery">
+          <div class="icon"><i class="fa-solid fa-truck"></i></div>
+          <p>Out for Delivery</p>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-status="Delivered">
+          <div class="icon"><i class="fa-solid fa-house-user"></i></div>
+          <p>Delivered</p>
+        </div>
+      </div>
+
+      <div class="order-details">
+        <h2>Order Details</h2>
+        <ul>
+          <li><strong>Placed on:</strong> <span id="order-date"></span></li>
+          <li><strong>Payment:</strong> <span id="payment"></span></li>
+          <li><strong>Shipping Address:</strong> <span id="address"></span></li>
+          <li><strong>Estimated Delivery:</strong> <span id="delivery"></span></li>
+        </ul>
+      </div>
+    </section>
   </main>
   <footer>
     <div class="footer-container">
@@ -68,7 +94,6 @@
         <a href="./order.html">My Order</a>
         <a href="./products.html">My Products</a>
       </div>
-      
       <div class="footer-section">
         <h3>Quick Link</h3>
         <a href="#">Privacy Policy</a>
@@ -92,7 +117,9 @@
       © Copyright Remi 2025. All rights reserved.
     </div>
   </footer>
-  <script src="./signup.js"></script>
+
+  <script src="./order.js"></script>
+
 </body>
 
 </html>
