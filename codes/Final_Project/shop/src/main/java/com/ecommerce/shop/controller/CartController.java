@@ -19,7 +19,7 @@ import com.ecommerce.shop.response.CartResponseDto;
 import com.ecommerce.shop.service.CartService;
 
 @RestController
-@RequestMapping(path = "/cart")
+@RequestMapping(path = "/api/cart")
 @CrossOrigin(origins = "*")
 public class CartController {
 	

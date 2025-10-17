@@ -1,158 +1,197 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - E-commerce</title>
-    <link rel="stylesheet" href="cart.css">
-    <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - E-commerce</title>
+  <link rel="stylesheet" href="cart.css" />
+  <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="top-banner">
-        Summer Sale! 50% Off All Items & Free Express Delivery - OFF 50% <a href="#">ShopNow</a>
+  <div class="top-banner">
+    Summer Sale! 50% Off All Items & Free Express Delivery - OFF 50% <a href="#">ShopNow</a>
+  </div>
+
+  <header>
+    <div class="logo">E-commerce</div>
+    <nav>
+      <a href="./index.html">Home</a>
+      <a href="./contact.html">Contact</a>
+      <a href="./about.html">About</a>
+      <a href="./signup.html">Sign Up</a>
+      <a href="./shop.html" class="shop-btn">Shop</a>
+    </nav>
+    <div class="header-right">
+      <input type="text" placeholder="What are you looking for?" class="search-box" />
+      <button class="login-btn">Log In</button>
     </div>
+  </header>
 
-    <header>
-        <div class="logo">E-commerce</div>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="./contact.html">Contact</a>
-            <a href="./about.html">About</a>
-            <a href="./signup.html">Sign Up</a>
-            <a href="./shop.html" class="shop-btn">Shop</a>
-        </nav>
-        <div class="header-right">
-            <input type="text" placeholder="What are you looking for?" class="search-box">
-            <button class="login-btn">Log In</button>
-        </div>
-    </header>
+  <div class="cart-container">
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-    <div class="cart-container">
-        <table id="cart-table">
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/80"> Hanes Cotton T-Shirt</td>
-                <td class="price">19.99</td>
-                <td><input type="number" class="quantity" value="1" min="1" style="width:50px;"></td>
-                <td class="subtotal">19.99</td>
-                <td><button class="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/80"> Nike Running Shoes</td>
-                <td class="price">89.99</td>
-                <td><input type="number" class="quantity" value="1" min="1" style="width:50px;"></td>
-                <td class="subtotal">89.99</td>
-                <td><button class="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/80"> Samsonite Backpack</td>
-                <td class="price">79.99</td>
-                <td><input type="number" class="quantity" value="1" min="1" style="width:50px;"></td>
-                <td class="subtotal">79.99</td>
-                <td><button class="remove-btn">Remove</button></td>
-            </tr>
-        </table>
-
-        <div class="cart-summary">
-            <h3>Cart Total</h3>
-            <p><span>Subtotal</span><span id="subtotal-value">189.97</span></p>
-            <p><span>Shipping</span><span>Free</span></p>
-            <p><strong>Total</strong><strong id="total-value">189.97</strong></p>
-            <a href="./checkout.html" class="checkout-btn">Proceed to checkout</a>
-        </div>
-
+    <div class="cart-summary">
+      <h3>Cart Total</h3>
+      <p><span>Subtotal</span><span id="subtotal-value">0.00</span></p>
+      <p><span>Shipping</span><span>Free</span></p>
+      <p><strong>Total</strong><strong id="total-value">0.00</strong></p>
+      <a href="./checkout.html" class="checkout-btn">Proceed to checkout</a>
     </div>
+  </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Exclusive</h3>
-                <p>Get 10% off your first order</p>
-                <div class="subscribe">
-                    <input type="email" placeholder="Enter your email"><br><br>
-                    <button>Subscribe</button>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Support</h3>
-                <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh</p>
-                <p>ecommerce@gmail.com</p>
-                <p>+88015-88888-9999</p>
-            </div>
-            <div class="footer-section">
-                <h3>Account</h3>
-                <a href="./profile.html">My Account</a>
-                <a href="./signup.html">Login / Register</a>
-                <a href="./cart.html">Cart</a>
-                <a href="./order.html">My Order</a>
-                <a href="./products.html">My Products</a>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Link</h3>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms Of Use</a>
-                <a href="#">FAQ</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Download App</h3>
-                <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
-                    alt="App QR">
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Exclusive</h3>
+        <p>Get 10% off your first order</p>
+        <div class="subscribe">
+          <input type="email" placeholder="Enter your email" /><br /><br />
+          <button>Subscribe</button>
         </div>
-        <div class="footer-bottom">
-            © Copyright Remi 2025. All rights reserved.
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh</p>
+        <p>ecommerce@gmail.com</p>
+        <p>+88015-88888-9999</p>
+      </div>
+      <div class="footer-section">
+        <h3>Account</h3>
+        <a href="./profile.html">My Account</a>
+        <a href="./signup.html">Login / Register</a>
+        <a href="./cart.html">Cart</a>
+        <a href="./order.html">My Order</a>
+        <a href="./products.html">My Products</a>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Link</h3>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms Of Use</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Download App</h3>
+        <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3" alt="App QR" />
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
         </div>
-    </footer>
+      </div>
+    </div>
+    <div class="footer-bottom">© Copyright Remi 2025. All rights reserved.</div>
+  </footer>
 
-    <script>
-        function updateTotals() {
-            let subtotal = 0;
-            document.querySelectorAll("#cart-table tr").forEach((row, index) => {
-                if (index === 0) return;
-                const price = parseFloat(row.querySelector(".price").innerText);
-                const qty = parseInt(row.querySelector(".quantity").value);
-                const rowSubtotal = price * qty;
-                row.querySelector(".subtotal").innerText = rowSubtotal.toFixed(2);
-                subtotal += rowSubtotal;
-            });
-            document.getElementById("subtotal-value").innerText = subtotal.toFixed(2);
-            document.getElementById("total-value").innerText = subtotal.toFixed(2);
-            localStorage.setItem("cartTotal", subtotal.toFixed(2));
-        }
+  <script>
+    const CART_API = "http://localhost:8086/api/cart";
+    let cartItems = [];
 
-        document.querySelectorAll(".quantity").forEach(input => {
-            input.addEventListener("change", updateTotals);
+    // Fetch cart data from backend
+    async function loadCart() {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(CART_API, {
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { "Authorization": `Bearer ${token}` } : {})
+          }
         });
 
-        document.querySelectorAll(".remove-btn").forEach(button => {
-            button.addEventListener("click", function () {
-                this.closest("tr").remove();
-                updateTotals();
-            });
-        });
+        if (!res.ok) throw new Error(`Server returned ${res.status}`);
+        cartItems = await res.json();
 
+        renderCart();
         updateTotals();
-    </script>
+      } catch (err) {
+        console.error("Error loading cart:", err);
+        alert("⚠️ Failed to load cart data from server.");
+      }
+    }
 
+    // Render all cart items
+    function renderCart() {
+      const tbody = document.querySelector("#cart-table tbody");
+      tbody.innerHTML = "";
+
+      cartItems.forEach((item, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${item.image}" width="80"> ${item.product_name}</td>
+            <td class="price">${item.price.toFixed(2)}</td>
+            <td><input type="number" class="quantity" value="${item.quantity}" min="1" data-index="${index}" style="width:50px;"></td>
+            <td class="subtotal">${(item.price * item.quantity).toFixed(2)}</td>
+            <td><button class="remove-btn" data-index="${index}">Remove</button></td>
+          </tr>`;
+      });
+
+      document.querySelectorAll(".quantity").forEach(input => {
+        input.addEventListener("change", updateQuantity);
+      });
+
+      document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", removeItem);
+      });
+    }
+
+    // Update quantity on frontend + backend
+    async function updateQuantity(e) {
+      const index = e.target.dataset.index;
+      const newQty = parseInt(e.target.value);
+      const item = cartItems[index];
+
+      if (newQty < 1) return;
+
+      cartItems[index].quantity = newQty;
+      updateTotals();
+
+      // Update on backend
+      await fetch(`${CART_API}/${item.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantity: newQty })
+      });
+    }
+
+    // Remove item from backend + UI
+    async function removeItem(e) {
+      const index = e.target.dataset.index;
+      const item = cartItems[index];
+      await fetch(`${CART_API}/${item.id}`, { method: "DELETE" });
+      cartItems.splice(index, 1);
+      renderCart();
+      updateTotals();
+    }
+
+    // Calculate totals
+    function updateTotals() {
+      let subtotal = 0;
+      cartItems.forEach(item => {
+        subtotal += item.price * item.quantity;
+      });
+
+      document.getElementById("subtotal-value").innerText = subtotal.toFixed(2);
+      document.getElementById("total-value").innerText = subtotal.toFixed(2);
+      localStorage.setItem("cartTotal", subtotal.toFixed(2));
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCart);
+  </script>
 </body>
-
 </html>

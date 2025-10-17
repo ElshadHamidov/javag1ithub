@@ -16,7 +16,7 @@ import com.ecommerce.shop.service.OrderService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/orders")
+@RequestMapping(path = "/api/orders")
 @CrossOrigin(origins = "*")
 public class OrderController {
 

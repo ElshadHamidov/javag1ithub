@@ -20,7 +20,7 @@ import com.ecommerce.shop.response.ProductResponseDto;
 import com.ecommerce.shop.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/products")
+@RequestMapping(path = "/api/products")
 @CrossOrigin(origins = "*")
 public class ProductController {
 

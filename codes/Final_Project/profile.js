@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userInfoDiv = document.getElementById("user-info");
 
-  fetch("/api/current-user", {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    window.location.href = "./login.html";
+    return;
+  }
+
+  fetch("http://localhost:8086/users/profile", {
     method: "GET",
-    credentials: "include", 
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+        }
   })
     .then(response => {
       if (response.status === 401) {
@@ -31,4 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(() => {
       userInfoDiv.textContent = "Unable to connect to the server.";
     });
+});
+
+document.querySelector('.my-products-btn').addEventListener('click', () => {
+  window.location.href = 'add-product.html';
 });
