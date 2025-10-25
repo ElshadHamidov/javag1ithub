@@ -36,6 +36,8 @@ public class ProductService {
 		product.setName(d.getName());
 		product.setPrice(d.getPrice());
 		product.setImage(d.getImage());
+		product.setCategory(d.getCategory());
+		product.setRating(d.getRating());
 		product.setUserId(id);
 		productRepository.save(product);
 	}
@@ -63,6 +65,8 @@ public class ProductService {
 			response.setName(product.getName());
 			response.setPrice(product.getPrice());
 			response.setImage(product.getImage());
+			response.setCategory(product.getCategory());
+			response.setRating(product.getRating());
 		}else {
 			throw new OurRuntimeException(null, "id tapilmadi");
 		}
@@ -80,6 +84,8 @@ public class ProductService {
 			product.setName(dto.getName());
 			product.setPrice(dto.getPrice());
 			product.setImage(dto.getImage());
+			product.setRating(dto.getRating());
+			product.setCategory(dto.getCategory());
 			productRepository.save(product);
 		}else {
 			throw new OurRuntimeException(null, "id tapilmadi");
