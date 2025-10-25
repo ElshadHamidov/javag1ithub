@@ -41,5 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.querySelector('.my-products-btn').addEventListener('click', () => {
-  window.location.href = 'add-product.html';
+  window.location.href = 'products.html';
 });

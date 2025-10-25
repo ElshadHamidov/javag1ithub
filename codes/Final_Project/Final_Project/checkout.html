@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,10 +102,8 @@
       </div>
       <div class="footer-section">
         <h3>Download App</h3>
-        <img
-          src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
-          alt="App QR"
-        />
+        <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="App QR" />
         <div class="social-icons">
           <a href="#"><i class="fa-brands fa-facebook"></i></a>
           <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -117,7 +116,6 @@
   </footer>
 
   <script>
-    // Load the total from localStorage (set by cart page)
     window.addEventListener("DOMContentLoaded", () => {
       const savedTotal = localStorage.getItem("cartTotal");
       if (savedTotal) {
@@ -126,29 +124,29 @@
       }
     });
 
-    // On "Place order" button click, send total to backend
     document.getElementById("place-order").addEventListener("click", async () => {
       const total = localStorage.getItem("cartTotal") || 0;
-
-      // Simulated backend request (replace URL with your API endpoint)
       const orderData = {
-        total: total,
-        date: new Date().toISOString(),
+        total: parseFloat(total),
+        date: new Date().toISOString()
       };
 
-      console.log("Sending order data:", orderData);
-
-      // Example POST request (ready for backend connection)
-      await fetch("http://localhost:8086/api/orders", {
+      const response = await fetch("http://localhost:8086/api/orders/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify(orderData)
       });
 
-      alert("Order placed successfully!");
-      localStorage.removeItem("cartTotal");
-      window.location.href = "./order.html";
+      if (response.ok) {
+        alert("Order placed successfully!");
+        localStorage.removeItem("cartTotal");
+        window.location.href = "./order.html";
+      } else {
+        const errorText = await response.text();
+        alert("Failed to place order: " + errorText);
+      }
     });
   </script>
 </body>
+
 </html>
