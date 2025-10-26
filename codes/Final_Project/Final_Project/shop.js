@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch(url, {
       headers: {
         "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
     if (!response.ok) throw new Error("Failed to fetch: " + response.status);
     return response.json();
@@ -38,15 +38,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     products.forEach((product) => {
       const card = document.createElement("div");
       card.classList.add("product-card");
-
       card.innerHTML = `
-        <img src="${product.imageUrl}" alt="${product.name}">
+        <img src="${product.image}" alt="${product.name}">
         <h4>${product.name}</h4>
         <p class="price">$${product.price?.toFixed(2) || 0}</p>
         <div class="rating">${"⭐".repeat(product.rating || 0)}</div>
         <button class="add-to-cart">Add to Cart</button>
       `;
-
       productsGrid.appendChild(card);
     });
   }
@@ -82,8 +80,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (sortSelect) {
     sortSelect.addEventListener("change", (e) => {
       const sortType = e.target.value;
-      if (sortType) sortProducts(sortType);
-      else loadProducts();
+      if (!sortType || sortType === "default") {
+        loadProducts();
+        return;
+      }
+      sortProducts(sortType);
     });
   }
 
