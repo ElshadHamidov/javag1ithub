@@ -14,14 +14,9 @@ import com.ecommerce.shop.requestDto.OrderRequestDto;
 public class OrderService {
 	
 	@Autowired
-	private CartRepository cartRepository;
-	
-	@Autowired
 	private OrderRepository orderRepository;
 
 	public void order(OrderRequestDto dto) {
-		Cart cart = cartRepository.findById(dto.getCartId())
-		.orElseThrow(() -> new OurRuntimeException(null, "cart not found"));
 		
 		Order order = new Order();
 		order.setFirstName(dto.getFirstName());
@@ -32,10 +27,8 @@ public class OrderService {
 		order.setPhone(dto.getPhone());
 		order.setEmail(dto.getEmail());
 		order.setCartNumber(dto.getCartNumber());
-		order.setExpiryMonth(dto.getExpiryMonth());
-		order.setExpiryYear(dto.getExpiryYear());
-		order.setZipCode(dto.getZipCode());;
-		order.setCart(cart);
+		order.setExpiryDate(dto.getExpiryDate());
+		order.setZipCode(dto.getZipCode());
 		orderRepository.save(order);
 	}
 

@@ -34,31 +34,28 @@
   </header>
 
   <section class="checkout-container">
-    <div class="checkout-form">
-      <h3>Billing Details</h3>
-      <input type="text" placeholder="First Name" />
-      <input type="text" placeholder="Last Name" />
-      <select>
-        <option value="">Select State</option>
-        <option value="ny">New York</option>
-        <option value="ca">California</option>
-        <option value="tx">Texas</option>
-      </select>
-      <input type="text" placeholder="City" />
-      <input type="text" placeholder="Address" />
-      <input type="text" placeholder="Zip" />
-      <input type="text" placeholder="Tel" />
-      <input type="email" placeholder="Email" />
+  <div class="checkout-form">
+    <h3>Billing Details</h3>
+    <input type="text" id="first-name" placeholder="First Name" />
+    <input type="text" id="last-name" placeholder="Last Name" />
+    <select id="country">
+      <option value="">Select Country</option>
+      <option value="US">United States</option>
+      <option value="CA">Canada</option>
+      <option value="AZ">Azerbaijan</option>
+    </select>
+    <input type="text" id="city" placeholder="City" />
+    <input type="text" id="address" placeholder="Address" />
+    <input type="text" id="zip-code" placeholder="Zip" />
+    <input type="text" id="phone" placeholder="Tel" />
+    <input type="email" id="email" placeholder="Email" />
 
-      <h3>Card Information</h3>
-      <input type="text" placeholder="Cardholder Name" />
-      <input type="text" placeholder="Card Number (xxxx xxxx xxxx xxxx)" maxlength="19" />
-      <div class="card-details">
-        <input type="text" placeholder="MM/YY" maxlength="5" />
-        <input type="text" placeholder="CVV" maxlength="3" />
-      </div>
-      <label><input type="checkbox" /> Agree to terms and conditions</label>
-    </div>
+    <h3>Card Information</h3>
+    <input type="text" id="cardholder-name" placeholder="Cardholder Name" />
+    <input type="text" id="cart-number" placeholder="Card Number (xxxx xxxx xxxx xxxx)" maxlength="19" />
+    <input type="text" id="expiry-Date" placeholder="MM/YY" maxlength="5" />
+
+    <label><input type="checkbox" id="terms" /> Agree to terms and conditions</label>
 
     <div class="checkout-summary">
       <h3>Cart Total</h3>
@@ -122,30 +119,59 @@
         document.getElementById("cart-subtotal").innerText = "$" + savedTotal;
         document.getElementById("cart-total").innerText = "$" + savedTotal;
       }
-    });
 
-    document.getElementById("place-order").addEventListener("click", async () => {
-      const total = localStorage.getItem("cartTotal") || 0;
-      const orderData = {
-        total: parseFloat(total),
-        date: new Date().toISOString()
-      };
+      const placeOrderBtn = document.getElementById("place-order");
+      if (placeOrderBtn) {
+        placeOrderBtn.addEventListener("click", async () => {
+          const token = localStorage.getItem("token"); // get token
+          const total = localStorage.getItem("cartTotal") || 0;
 
-      const response = await fetch("http://localhost:8086/api/orders/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-      });
+          if (!token) {
+            alert("You must be logged in to place an order.");
+            return;
+          }
 
-      if (response.ok) {
-        alert("Order placed successfully!");
-        localStorage.removeItem("cartTotal");
-        window.location.href = "./order.html";
+          const orderData = {
+            total: parseFloat(total),
+            date: new Date().toISOString(),
+            cartNumber: localStorage.getItem("cartNumber"), 
+            cartNumber: document.getElementById("cart-number").value,
+            expiryDate: document.getElementById("expiry-Date").value,
+            address: document.getElementById("address").value,
+            city: document.getElementById("city").value,
+            zipCode: document.getElementById("zip-code").value,
+            country: document.getElementById("country").value,
+            phone: document.getElementById("phone").value
+          };
+
+
+          try {
+            const response = await fetch("http://localhost:8086/api/orders/add", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
+              body: JSON.stringify(orderData)
+            });
+
+            if (response.ok) {
+              alert("Order placed successfully!");
+              localStorage.removeItem("cartTotal");
+              window.location.href = "./order.html";
+            } else {
+              const errorText = await response.text();
+              alert("Failed to place order: " + errorText);
+            }
+          } catch (err) {
+            alert("Error placing order: " + err.message);
+          }
+        });
       } else {
-        const errorText = await response.text();
-        alert("Failed to place order: " + errorText);
+        console.error("Place Order button not found");
       }
     });
+
   </script>
 </body>
 

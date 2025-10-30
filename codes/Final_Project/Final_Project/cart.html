@@ -105,29 +105,30 @@
     const CART_API = "http://localhost:8086/api/cart";
     let cartItems = [];
 
-    // Load all cart items
+    document.addEventListener("DOMContentLoaded", loadCart);
+
     async function loadCart() {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${CART_API}/getCart`, {
           headers: {
             "Content-Type": "application/json",
-            ...(token ? { "Authorization": `Bearer ${token}` } : {})
-          }
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
         });
 
         if (!res.ok) throw new Error(`Server returned ${res.status}`);
-        cartItems = await res.json();
+        const data = await res.json();
+        console.log("🧾 Cart response:", data);
 
+        cartItems = Array.isArray(data) ? data : [];
         renderCart();
-        updateTotals();
       } catch (err) {
         console.error("❌ Error loading cart:", err);
         alert("⚠️ Failed to load cart data from server.");
       }
     }
 
-    // Render cart items in table
     function renderCart() {
       const tbody = document.querySelector("#cart-table tbody");
       tbody.innerHTML = "";
@@ -139,55 +140,84 @@
       }
 
       cartItems.forEach((item, index) => {
+        // If product is nested inside the item
+        const product = item.product || item;
+
         tbody.innerHTML += `
       <tr>
-        <td><img src="${item.image}" width="80"> ${item.product_name}</td>
-        <td class="price">${item.price.toFixed(2)}</td>
+        <td><img src="${product.image}" width="80"> ${product.name || item.product_name}</td>
+        <td class="price">${(product.price || item.price).toFixed(2)}</td>
         <td>
-          <input type="number" 
-                 class="quantity" 
-                 value="${item.quantity}" 
-                 min="1" 
-                 data-index="${index}" 
+          <input type="number"
+                 class="quantity"
+                 value="${item.quantity}"
+                 min="1"
+                 data-index="${index}"
                  style="width:50px;">
         </td>
-        <td class="subtotal">${(item.price * item.quantity).toFixed(2)}</td>
+        <td class="subtotal">${((product.price || item.price) * item.quantity).toFixed(2)}</td>
         <td><button class="remove-btn" data-index="${index}">🗑️ Remove</button></td>
       </tr>`;
       });
 
-      // Attach event listeners
       document.querySelectorAll(".quantity").forEach(input =>
         input.addEventListener("change", updateQuantity)
       );
       document.querySelectorAll(".remove-btn").forEach(btn =>
         btn.addEventListener("click", removeItem)
       );
+
+      updateTotals();
     }
 
-    // Update item quantity both locally and in backend
+    function updateTotals() {
+      const subtotal = cartItems.reduce((sum, item) => {
+        const product = item.product || item; // fallback
+        const price = Number(product.price || item.price || 0);
+        const quantity = Number(item.quantity || 1);
+        return sum + price * quantity;
+      }, 0);
+
+      const subtotalEl = document.getElementById("subtotal-value");
+      const totalEl = document.getElementById("total-value");
+
+      if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2);
+      if (totalEl) totalEl.textContent = subtotal.toFixed(2);
+
+      localStorage.setItem("cartTotal", subtotal.toFixed(2));
+    }
+
+
+
+    function handleCartEvent(e) {
+      if (e.target.classList.contains("quantity")) updateQuantity(e);
+      if (e.target.classList.contains("remove-btn")) removeItem(e);
+    }
+
     async function updateQuantity(e) {
       const index = e.target.dataset.index;
       const newQty = parseInt(e.target.value);
       const item = cartItems[index];
 
-      if (isNaN(newQty) || newQty < 1) return;
+      if (!item || isNaN(newQty) || newQty < 1) return;
 
-      // Update frontend immediately
-      cartItems[index].quantity = newQty;
-      renderCart();
+      item.quantity = newQty;
+      document.querySelectorAll(".subtotal")[index].textContent = (item.price * newQty).toFixed(2);
       updateTotals();
 
-      // Update backend
       try {
+        const token = localStorage.getItem("token");
         const res = await fetch(`${CART_API}/update`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
           body: JSON.stringify({
             id: item.id,
             productId: item.productId,
-            quantity: newQty
-          })
+            quantity: newQty,
+          }),
         });
 
         if (!res.ok) throw new Error(`Failed to update item ID ${item.id}`);
@@ -200,33 +230,26 @@
     async function removeItem(e) {
       const index = e.target.dataset.index;
       const item = cartItems[index];
+      if (!item) return;
 
-      if (!confirm(`Remove ${item.product_name} from your cart?`)) return;
+      if (!confirm(`Remove ${item.productName} from your cart?`)) return;
 
       try {
+        const token = localStorage.getItem("token");
         const res = await fetch(`${CART_API}/delete/${item.id}`, {
-          method: "DELETE"
+          method: "DELETE",
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
         });
 
         if (!res.ok) throw new Error(`Failed to delete item ID ${item.id}`);
         cartItems.splice(index, 1);
         renderCart();
-        updateTotals();
       } catch (err) {
         console.error("❌ Error deleting item:", err);
         alert("⚠️ Failed to remove item from server.");
       }
-    }
-
-    function updateTotals() {
-      let subtotal = 0;
-      cartItems.forEach(item => {
-        subtotal += item.price * item.quantity;
-      });
-
-      document.getElementById("subtotal-value").innerText = subtotal.toFixed(2);
-      document.getElementById("total-value").innerText = subtotal.toFixed(2);
-      localStorage.setItem("cartTotal", subtotal.toFixed(2));
     }
 
     async function addToCart(productId, quantity = 1) {
@@ -236,21 +259,40 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            ...(token ? { "Authorization": `Bearer ${token}` } : {})
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
-          body: JSON.stringify({ productId, quantity })
+          body: JSON.stringify({ productId, quantity }),
         });
 
         if (!res.ok) throw new Error("Add to cart failed");
         alert("✅ Product added to cart successfully!");
-        loadCart(); 
+        await loadCart();
       } catch (err) {
         console.error("❌ Error adding to cart:", err);
         alert("⚠️ Failed to add product to cart.");
       }
     }
+    async function loadCart() {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${CART_API}/getCart`, {
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        });
 
-    document.addEventListener("DOMContentLoaded", loadCart);
+        if (!res.ok) throw new Error(`Server returned ${res.status}`);
+        const data = await res.json();
+        console.log("🧾 Cart response:", data);
+        cartItems = Array.isArray(data) ? data : Array.isArray(data.cart) ? data.cart : [];
+        renderCart();
+      } catch (err) {
+        console.error("❌ Error loading cart:", err);
+        alert("⚠️ Failed to load cart data from server.");
+      }
+    }
+
   </script>
 </body>
 

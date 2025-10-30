@@ -2,119 +2,125 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Shopping Page</title>
-    <link rel="stylesheet" href="shop.css">
-    <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Shop</title>
+  <link rel="stylesheet" href="shop.css">
+  <script src="https://kit.fontawesome.com/8b8c0b08e2.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="top-banner">
-        Summer Sale! 50% Off All Items & Free Express Delivery - OFF 50% <a href="#">ShopNow</a>
+  <div class="top-banner">
+    Summer Sale! 50% Off All Items & Free Express Delivery - OFF 50% <a href="#">ShopNow</a>
+  </div>
+
+  <header>
+    <div class="logo">E-commerce</div>
+    <nav>
+      <a href="./index.html">Home</a>
+      <a href="./contact.html">Contact</a>
+      <a href="./about.html">About</a>
+      <a href="./signup.html">Sign Up</a>
+      <a href="./shop.html" class="shop-btn">Shop</a>
+    </nav>
+    <div class="header-right">
+      <input type="text" placeholder="What are you looking for?" class="search-box" id="search">
+      <button class="login-btn">Log In</button>
+    </div>
+  </header>
+
+  <div class="shop-container">
+    <div class="sidebar">
+      <h3>Shop</h3>
+      <input type="text" placeholder="Search..." id="search-sidebar">
+      <div class="mb-3">
+        <label>Category</label>
+        <select id="category" class="form-control" required>
+          <option value="all">All Categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home">Home</option>
+          <option value="Sports">Sports</option>
+          <option value="Beauty">Beauty</option>
+        </select>
+      </div>
+      <div class="rate">
+        <h3>Rating</h3>
+        <span class="rating-filter" data-rating="5">⭐⭐⭐⭐⭐</span><br>
+        <span class="rating-filter" data-rating="4">⭐⭐⭐⭐</span><br>
+        <span class="rating-filter" data-rating="3">⭐⭐⭐</span><br>
+        <span class="rating-filter" data-rating="2">⭐⭐</span><br>
+        <span class="rating-filter" data-rating="1">⭐</span>
+      </div>
     </div>
 
-    <header>
-        <div class="logo">E-commerce</div>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="./contact.html">Contact</a>
-            <a href="./about.html">About</a>
-            <a href="./signup.html">Sign Up</a>
-            <a href="./shop.html" class="shop-btn">Shop</a>
-        </nav>
-        <div class="header-right">
-            <input type="text" placeholder="What are you looking for?" class="search-box">
-            <button class="login-btn">Log In</button>
-        </div>
-    </header>
-    <div class="shop-container">
-        <div class="sidebar">
-            <h3>Shop</h3>
-            <input type="text" placeholder="Search...">
-            <div class="category">
-                <h3>Category</h3>
-                <a>Clothing</a>
-                <a>Footwear</a>
-                <a>Accessories</a>
-                <a>Tablets</a>
-            </div>
-            <div class="rate">
-                <h3>Rate</h3>
-                <span>⭐⭐⭐⭐⭐</span>
-                <span>⭐⭐⭐⭐</span>
-                <span>⭐⭐⭐</span>
-                <span>⭐⭐</span>
-                <span>⭐</span>
-            </div>
-        </div>
-
-        <div class="product-section">
-            <div class="product-header">
-                <button>All Products</button>
-                <select>
-                    <option>Sort by</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                    <option>Rating</option>
-                </select>
-            </div>
-            <div class="products-grid">
-
-            </div>
-        </div>
+    <div class="product-section">
+      <div class="product-header">
+        <button onclick="window.location.reload()">All Products</button>
+        <select id="sort">
+          <option value="default">Sort by</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating-desc">Rating: High to Low</option>
+          <option value="rating-asc">Rating: Low to High</option>
+        </select>
+      </div>
+      <div class="products-grid"></div>
     </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Exclusive</h3>
-                <p>Get 10% off your first order</p>
-                <div class="subscribe">
-                    <input type="email" placeholder="Enter your email"><br><br>
-                    <button>Subscribe</button>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Support</h3>
-                <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh</p>
-                <p>ecommerce@gmail.com</p>
-                <p>+88015-88888-9999</p>
-            </div>
-            <div class="footer-section">
-                <h3>Account</h3>
-                <a href="./profile.html">My Account</a>
-                <a href="./signup.html">Login / Register</a>
-                <a href="./cart.html">Cart</a>
-                <a href="./order.html">My Order</a>
-                <a href="./products.html">My Products</a>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Link</h3>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms Of Use</a>
-                <a href="#">FAQ</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Download App</h3>
-                <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
-                    alt="App QR">
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Exclusive</h3>
+        <p>Get 10% off your first order</p>
+        <div class="subscribe">
+          <input type="email" placeholder="Enter your email"><br><br>
+          <button>Subscribe</button>
         </div>
-        <div class="footer-bottom">
-            © Copyright Remi 2025. All rights reserved.
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh</p>
+        <p>ecommerce@gmail.com</p>
+        <p>+88015-88888-9999</p>
+      </div>
+      <div class="footer-section">
+        <h3>Account</h3>
+        <a href="./profile.html">My Account</a>
+        <a href="./signup.html">Login / Register</a>
+        <a href="./cart.html">Cart</a>
+        <a href="./order.html">My Order</a>
+        <a href="./products.html">My Products</a>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Link</h3>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms Of Use</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Download App</h3>
+        <img src="https://th.bing.com/th/id/OIP.VfrGvim12lMo8DRnHOCTlwHaHU?w=188&h=186&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="App QR">
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
         </div>
-    </footer>
-    <script src="./shop.js"></script>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © Copyright Remi 2025. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="shop.js"></script>
 </body>
 
 </html>

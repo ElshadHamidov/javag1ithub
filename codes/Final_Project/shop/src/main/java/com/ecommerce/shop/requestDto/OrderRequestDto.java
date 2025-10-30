@@ -16,9 +16,6 @@ import lombok.Setter;
 @Setter
 public class OrderRequestDto {
 	
-	@NotNull
-	private Integer cartId;
-	
 	@Size(min = 2, max = 20, message = "FirstName must be min 2 max 20 characters")
 	private String firstName;
 	
@@ -47,10 +44,6 @@ public class OrderRequestDto {
 	private String zipCode;
 	
 	@NotBlank(message = "Can not empty expiry month")
-	private String expiryMonth;
-	
-	@NotNull(message = "Expiryyear cannot be null.")
-	@Min(value = 23, message = "Expiry year must be greater than or equals to the current year")
-	private Integer expiryYear;
+	private String expiryDate;
 	
 }

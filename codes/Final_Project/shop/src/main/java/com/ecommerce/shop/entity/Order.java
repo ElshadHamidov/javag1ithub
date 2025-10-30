@@ -31,8 +31,7 @@ public class Order {
 	private String email;
 	private String cartNumber;
 	private String zipCode;
-	private String expiryMonth;
-	private Integer expiryYear;
+	private String expiryDate;
 	
 	@ManyToOne
 	private Cart cart;

@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const productId = new URLSearchParams(window.location.search).get("id");
   const BASE_URL = "http://localhost:8086/api/products";
+  const CART_API = "http://localhost:8086/api/cart";
   const token = localStorage.getItem("token");
 
   if (!productId) {
     console.error("No product ID found in URL");
+    document.querySelector(".product-page").innerHTML = "<h2>Product not found.</h2>";
     return;
   }
 
   async function fetchWithAuth(url) {
     const response = await fetch(url, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        "Authorization": token ? `Bearer ${token}` : "",
         "Content-Type": "application/json"
       }
     });
@@ -23,20 +25,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const product = await fetchWithAuth(`${BASE_URL}/getById/${productId}`);
 
+      // ✅ Populate product details
       document.getElementById("product-name").textContent = product.name;
       document.getElementById("product-price").textContent = `$${product.price?.toFixed(2) || "0.00"}`;
       document.getElementById("product-description").textContent = product.description || "No description available.";
-      document.getElementById("product-image").src = product.imageUrl || "placeholder.jpg";
+      document.getElementById("product-image").src = product.image || "placeholder.jpg";
 
-      const stars = "★".repeat(Math.round(product.rating || 0));
-      document.getElementById("product-rating").innerHTML = stars || "No ratings yet";
+      // ⭐ Rating stars
+      const stars = "★".repeat(Math.round(product.rating || 0)) || "No ratings yet";
+      document.getElementById("product-rating").textContent = stars;
 
+      // 🛒 Add to cart event
+      document.querySelector(".add-btn").addEventListener("click", () => {
+        addToCart(product.id);
+      });
+
+      // 📦 Load related products
       if (product.category) {
         loadRelated(product.category, product.id);
       }
     } catch (err) {
       console.error("Error fetching product:", err);
-      document.getElementById("product-name").textContent = "Product not found.";
+      document.querySelector(".product-page").innerHTML = "<h2>Failed to load product.</h2>";
+    }
+  }
+
+  async function addToCart(productId) {
+    try {
+      const res = await fetch(`${CART_API}/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({ productId, quantity: 1 })
+      });
+
+      if (!res.ok) throw new Error("Failed to add product to cart");
+      alert("✅ Product added to cart!");
+    } catch (err) {
+      console.error("Add to cart error:", err);
+      alert("⚠️ Unable to add to cart. Please log in or try again.");
     }
   }
 
@@ -49,11 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         .filter(p => p.category === category && p.id !== parseInt(excludeId))
         .slice(0, 4);
 
-      const related = document.getElementById("related-products");
-      related.innerHTML = "";
+      const relatedContainer = document.getElementById("related-products");
+      relatedContainer.innerHTML = "";
 
-      if (relatedProducts.length === 0) {
-        related.innerHTML = "<p>No related products found.</p>";
+      if (!relatedProducts.length) {
+        relatedContainer.innerHTML = "<p>No related products found.</p>";
         return;
       }
 
@@ -61,14 +90,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         const div = document.createElement("div");
         div.classList.add("related-item");
         div.innerHTML = `
-          <img src="${p.imageUrl}" alt="${p.name}">
+          <img src="${p.image}" alt="${p.name}">
           <h4>${p.name}</h4>
           <p>$${p.price?.toFixed(2) || 0}</p>
         `;
         div.addEventListener("click", () => {
           window.location.href = `product.html?id=${p.id}`;
         });
-        related.appendChild(div);
+        relatedContainer.appendChild(div);
       });
     } catch (err) {
       console.error("Error loading related products:", err);
